@@ -1,5 +1,6 @@
 package unit1;
 
+
 import javax.swing.JFrame;
 
 public class GraphicsRunner extends JFrame//gives a window
@@ -15,9 +16,11 @@ public class GraphicsRunner extends JFrame//gives a window
 
 		//getContentPane().add(new SmileyFace());//create a window, put canvas in the window
 		
-		//getContentPane().add(new BigHouse());		
+		getContentPane().add(new ShapePanel());		
 		
-		getContentPane().add(new Robot());
+		//getContentPane().add(new Robot());
+		//getContentPane().add(new ReviewOne());
+		
 		
 		setVisible(true);
 	}
@@ -25,5 +28,8 @@ public class GraphicsRunner extends JFrame//gives a window
 	public static void main( String args[] )
 	{
 		GraphicsRunner run = new GraphicsRunner();//instantiation
+		//ReviewOne test = new ReviewOne();
+		//test.lengthWidth();
+		
 	}
 }

@@ -2,7 +2,8 @@ package unit2;
 
 public class SavingsAccount
 {
-    private double balance;
+    double interest;
+	private double balance;
 
     /**
      * Constructs a bank account with a zero balance.
@@ -10,6 +11,7 @@ public class SavingsAccount
     public SavingsAccount()
     {
         balance = 0;
+        interest = 0;
     }
 
     /**
@@ -17,9 +19,10 @@ public class SavingsAccount
      *
      * @param initialBalance the initial balance
      */
-    public SavingsAccount(double initialBalance)
+    public SavingsAccount(double initialBalance, double initialInterest)
     {
         balance = initialBalance;
+        interest = initialInterest;
     }
 
     /**
@@ -50,5 +53,11 @@ public class SavingsAccount
     public double getBalance()
     {
         return balance;
+    }
+    
+    public double addInterest()
+    {
+    	balance = balance + balance*(interest/100);
+    	return balance;
     }
 }

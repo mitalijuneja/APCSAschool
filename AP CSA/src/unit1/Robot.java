@@ -21,8 +21,10 @@ class Robot extends Canvas
 
       //call head method
       head(window);
-      upperBody(window);
+      
       //call other methods
+      upperBody(window);
+      lowerBody(window);
       
    }
 
@@ -50,12 +52,19 @@ class Robot extends Canvas
 		//add more code here
 	   window.setColor(Color.GREEN);
 	   window.fillRect(340,220,120,90);
+	   window.setColor(Color.ORANGE);
+	   window.drawLine(340, 225, 300, 190);
+	   window.drawLine(460, 225, 500, 190);
    }
 
    public void lowerBody( Graphics window )
    {
 
 		//add more code here
-
+	   window.setColor(Color.CYAN);
+	   window.fillRect(340,320,120,90);
+	   window.setColor(Color.ORANGE);
+	   window.drawLine(340, 405, 300, 440);
+	   window.drawLine(460, 405, 500, 440);
    }
 }

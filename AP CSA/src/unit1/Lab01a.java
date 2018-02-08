@@ -16,5 +16,3 @@ public class Lab01a
 	   stars.printTwentyDashes();
    }
 }
-
-
