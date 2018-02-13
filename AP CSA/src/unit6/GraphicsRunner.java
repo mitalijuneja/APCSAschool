@@ -13,7 +13,8 @@ public class GraphicsRunner extends JFrame
 		super("Graphics Runner");
 		setSize(WIDTH,HEIGHT);
 						
-		getContentPane().add(new ForLoopCircles());
+		//getContentPane().add(new ForLoopCircles());
+		getContentPane().add(new WhileLoopCircles());
 				
 		setVisible(true);
 	}
