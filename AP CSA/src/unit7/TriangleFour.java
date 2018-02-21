@@ -27,12 +27,24 @@ public class TriangleFour
 
 	public String getLetter()
 	{
-		return "#";
+		return letter;
 	}
 
 	public String toString()
 	{
 		String output="";
+		for (int i = size; i > 0; i --)
+		{
+			for (int j = i; j < size; j++)
+			{
+				output = output + " ";
+			}
+			for (int k = i; k >0; k--)
+			{
+				output = output + letter;
+			}
+			output = output + "\n";
+		}
 		return output+"\n";
 	}
 }
