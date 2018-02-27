@@ -2,6 +2,7 @@ package elevens;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The Deck class represents a shuffled deck of cards.
@@ -36,11 +37,22 @@ public class Deck {
 	 */
 	public Deck(String[] ranks, String[] suits, int[] values) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-		Card[] myCards = new Card[52];
+		Card[] myCards = new Card[suits.length*ranks.length];
+		int index = 0;
 		for (int i = 0; i < suits.length; i++)
 		{
-			for (int j = 0; j < )
+			for (int j = 0; j < ranks.length; j++)
+			{
+				Card card1 = new Card(ranks[j], suits[i], values[j]);
+				myCards[index] = card1;
+				index++;
+				
+			}
 		}
+		cards = myCards;
+		System.out.println(Arrays.toString(cards));
+		size = index+ 1;
+		shuffle();
 	}
 
 
@@ -50,7 +62,7 @@ public class Deck {
 	 */
 	public boolean isEmpty() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-		if (cards.length == 0)
+		if (size == 0)
 		{
 			return true;
 		}
@@ -80,6 +92,12 @@ public class Deck {
 	 */
 	public Card deal() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
+		if (isEmpty())
+		{
+			return null;
+		}
+		size = size - 1;
+		return cards[size]; 
 	}
 
 	/**
