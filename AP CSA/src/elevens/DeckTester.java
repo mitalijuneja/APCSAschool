@@ -11,7 +11,7 @@ public class DeckTester {
 	 */
 	public static void main(String[] args) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-		String[] ranks = {"jack", "queen", "king"};
+		/*String[] ranks = {"jack", "queen", "king"};
 		String[] suits = {"diamonds", "spades"};
 		int[] pointValues = {11,12,13};
 		Deck deck1 = new Deck(ranks, suits, pointValues);
@@ -25,6 +25,13 @@ public class DeckTester {
 		String[] suits3 = {"diamonds", "clubs"};
 		int[] pointValues3 = {4,5,6};
 		Deck deck3 = new Deck (ranks3, suits3,pointValues3);
+
+		 */
+		String[] cardRanks = {"ace", "king", "queen", "jack", "10", "9", "8", "7", "6", "5", "4", "3", "2"};
+		String[] cardSuits = {"diamonds", "spades", "clubs", "hearts"};
+		int[] cardPointValues = {11, 10,10,10, 10, 9,8,7,6,5,4,3,2};
+		Deck cardDeck = new Deck(cardRanks, cardSuits, cardPointValues);
+		System.out.println(cardDeck);
 		
 	}
 }

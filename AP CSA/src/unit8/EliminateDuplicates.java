@@ -25,29 +25,18 @@ public class EliminateDuplicates {
 			}
 			c = 0;
 			System.out.println(count);
-			
+			String removeDuplicates = list[0] +" ";
+			for (int i = 1; i < list.length; i++)
+			{
+				if (removeDuplicates.indexOf(list[i] + " ") < 0)
+				{
+					removeDuplicates = removeDuplicates + list[i] + " ";
+				}
+			}
 			
 		}
 		
-		int[] newList = new int[count];
-		int index = 0;
-		int counter = 0;
-		for (int i = 0; i < list.length; i++)
-		{
-			for (int j = 0; j < newList.length; j++)
-			{
-				if (newList[j] == list[i])
-				{
-				counter++;
-				}
-				if (counter == 0)
-				{
-					newList[j] = list[i];
-				}
-			}
-		}
-		return newList;
-	}
+		
 
 	
 	public static void main(String[] args)

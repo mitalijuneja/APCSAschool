@@ -53,6 +53,7 @@ public class Deck {
 		System.out.println(Arrays.toString(cards));
 		size = index+ 1;
 		shuffle();
+		
 	}
 
 
@@ -75,6 +76,7 @@ public class Deck {
 	 */
 	public int size() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
+		return size;
 	}
 
 	/**
@@ -83,6 +85,17 @@ public class Deck {
 	 */
 	public void shuffle() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 4 *** */
+		Card temp;
+		Card[] shuffle = cards;
+		for (int k = shuffle.length -1 ; k >=1; k--)
+		{
+			int r = (int)(Math.random() * (k+1));
+			temp = shuffle[r];
+			shuffle[r] = shuffle[k];
+			shuffle[k] = temp;
+		}
+		cards = shuffle;
+		size = shuffle.length;
 	}
 
 	/**
@@ -110,9 +123,9 @@ public class Deck {
 
 
 		//Unit 9 - modify to work with Arrays
-		/*
+		
 		for (int k = size - 1; k >= 0; k--) {
-			rtn = rtn + cards.get(k);
+			rtn = rtn + cards[k];
 			if (k != 0) {
 				rtn = rtn + ", ";
 			}
@@ -123,17 +136,17 @@ public class Deck {
 		}
 
 		rtn = rtn + "\nDealt cards: \n";
-		for (int k = cards.size() - 1; k >= size; k--) {
-			rtn = rtn + cards.get(k);
+		for (int k = cards.length - 1; k >= size; k--) {
+			rtn = rtn + cards[k];
 			if (k != size) {
 				rtn = rtn + ", ";
 			}
-			if ((k - cards.size()) % 2 == 0) {
+			if ((k - cards.length) % 2 == 0) {
 				// Insert carriage returns so entire deck is visible on console.
 				rtn = rtn + "\n";
 			}
 		}
-		*/
+		
 
 		rtn = rtn + "\n";
 		return rtn;
