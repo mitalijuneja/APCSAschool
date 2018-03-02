@@ -55,14 +55,23 @@ public class Words
 	public int removeWordsWithXChars(int size)
 	{
 		int vowels = 0;
-		for (Word w: words)
+		for (int i = 0; i < words.size(); i++)
+		{
+			if(words.get(i).getLength() == size)
+			{
+				vowels = vowels + words.get(i).getNumVowels();
+				i = i - 1;
+			}
+		}
+		
+		/*for (Word w: words)
 		{
 			if (w.getLength() == size)
 			{
 				vowels = vowels + w.getNumVowels();
 				words.remove(w);
 			}
-		}
+		}*/
 
 		return vowels;
 	}

@@ -50,7 +50,7 @@ public class Deck {
 			}
 		}
 		cards = myCards;
-		System.out.println(Arrays.toString(cards));
+		//System.out.println(Arrays.toString(cards));
 		size = index+ 1;
 		shuffle();
 		
