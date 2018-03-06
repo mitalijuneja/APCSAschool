@@ -16,13 +16,14 @@ public class MadLib
 	public MadLib()
 	{
 
-
+		
 
 	}
 
 	public MadLib(String fileName)
 	{
 		//load stuff
+		System.out.println("TEST");
 		verbs = new ArrayList();
 		loadVerbs();
 		
@@ -34,6 +35,7 @@ public class MadLib
 		
 		
 		try{
+			
 			Scanner file = new Scanner(new File(fileName));
 		
 		
@@ -47,7 +49,7 @@ public class MadLib
 		}
 		catch(Exception e)
 		{
-			out.println("Houston we have a problem!");
+			out.println("Houston we have a problem!\n");
 		}
 		
 	}
