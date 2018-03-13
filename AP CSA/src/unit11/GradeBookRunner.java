@@ -43,13 +43,12 @@ public class GradeBookRunner
 		out.println(String.format(newClass.getStudentName(4) + "\'s average %.2f",newClass.getStudentAverage(4)));	
 
 		
-		out.println(String.format("Sandy" + "\'s average %.2f",newClass.getStudentAverage("Sandy")));	
 
 		out.println("Failure List = " + newClass.getFailureList(70));	
 		out.println("Highest Average = " + newClass.getStudentWithHighestAverage());
 		out.println("Lowest Average = " + newClass.getStudentWithLowestAverage());
 								
-		out.println(String.format("Class Average = %.2f",test.getClassAverage()));	
+		out.println(String.format("Class Average = %.2f",newClass.getClassAverage()));	
 
 
 
