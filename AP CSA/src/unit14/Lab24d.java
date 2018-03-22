@@ -17,6 +17,7 @@ public class Lab24d
 		{
 			TicTacToe test = new TicTacToe (file.nextLine());
 			System.out.println(test);
+			
 		}
 
 

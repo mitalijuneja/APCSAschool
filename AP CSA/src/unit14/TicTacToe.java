@@ -35,21 +35,28 @@ public class TicTacToe
 		{
 			if (mat[i][0] == mat[i][1] && mat[i][1] == mat[i][2] )
 			{
-				return mat[i][0] + " winner found horizontally";
+				return mat[i][0] + " wins horizontally";
 			}
+		}
+		for (int j = 0; j < mat.length; j++)
+		{
+			if (mat[0][j] == mat[1][j] && mat[1][j] == mat[2][j])
+			{
+				return mat[0][j] + " wins vertically";
+			}
+		}
+		if (mat[0][0] == mat[1][1] && mat[1][1] == mat[2][2])
+		{
+			return mat[0][0] + " wins diagonally";
+		}
+		if (mat[0][2] == mat[1][1] && mat[1][1] == mat[2][0])
+		{
+			return mat[0][2] + " wins diagonally";
 		}
 		
 
 
-
-
-
-
-
-
-
-
-		return "";
+		return "draw - no winner found";
 	}
 
 	public String toString()
@@ -64,10 +71,7 @@ public class TicTacToe
 			}
 			output = output + "\n";
 		}
-
-
-
-
+		output = output + getWinner();
 		return output+"\n\n";
 	}
 }

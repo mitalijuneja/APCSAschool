@@ -40,44 +40,54 @@ public class Maze
 
 	public boolean hasExitPath(int r, int c)
 	{
-		int count = 0;
-		if ((r >= 0 && r < maze.length) && (c >= 0 && c < maze[r].length) && maze[r][c] ==1)
+		//int count = 0;
+		if (((r >= 0 && r < maze.length) && (c >= 0 && c < maze[r].length) )&& (maze[r][c] ==1))
 		{
-			maze[r][c] = 0;
+			maze[r][c] = 2;
 		
 			
 			if (c == maze[r].length - 1)
 			{
-				count++;
-				System.out.println(count);
-				System.out.println(c);
+				return true;
 			}
 			
-			
-			if (c - 1 >= 0)
+			else
 			{
-				hasExitPath(r, c-1);
-			}
-			
-			if (c + 1 < maze[r].length)
-			{
-				hasExitPath(r,c+1);
-			}
-			
-			if (r - 1 >= 0)
-			{
-				hasExitPath(r-1, c);
-			}
-			
-			if (r + 1 < maze.length)
-			{
-				hasExitPath(r+1, c);
+				if (c - 1 >= 0)
+				{
+					if (hasExitPath(r, c-1))
+					{
+						return true;
+					}
+				}
+				
+				if (c + 1 < maze[r].length)
+				{
+					if (hasExitPath(r,c+1))
+					{
+						return true;
+					}
+				}
+				
+				if (r - 1 >= 0)
+				{
+					if (hasExitPath(r-1, c))
+					{
+						return true;
+					}
+				}
+				
+				if (r + 1 < maze.length)
+				{
+					if(hasExitPath(r+1, c))
+					{
+						return true;
+					}
+				}
 			}
 		}
-		if (count >0)
-		{
-			return true;
-		}
+			
+		
 		return false;
 	}
 

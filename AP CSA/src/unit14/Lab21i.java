@@ -17,7 +17,7 @@ public class Lab21i
 			String maze = file.nextLine();
 			
 			Maze test = new Maze(size, maze);
-			test.hasExitPath(0, 0);
+			//test.hasExitPath(0, 0);
 			System.out.println(test);
 		}
 		
