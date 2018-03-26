@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * The ElevensBoard class represents the board in a game of Elevens.
  */
-public class ElevensBoard {
+public class ElevensBoard extends Board {
 
 	/**
 	 * The size (number of cards) on the board.
@@ -53,6 +53,17 @@ public class ElevensBoard {
 	 * Creates a new <code>ElevensBoard</code> instance.
 	 */
 	public ElevensBoard() {
+		/*cards = new Card[BOARD_SIZE];
+		deck = new Deck(RANKS, SUITS, POINT_VALUES);
+		if (I_AM_DEBUGGING) {
+			System.out.println(deck);
+			System.out.println("----------");
+		}
+		dealMyCards();*/
+		//int size, String[] ranks, String[] suits, int[] pointValues
+		
+		
+		super(BOARD_SIZE, RANKS, SUITS, POINT_VALUES);
 		cards = new Card[BOARD_SIZE];
 		deck = new Deck(RANKS, SUITS, POINT_VALUES);
 		if (I_AM_DEBUGGING) {
@@ -188,6 +199,12 @@ public class ElevensBoard {
 	 */
 	public boolean isLegal(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		if (containsPairSum11 (selectedCards) || containsJQK (selectedCards))
+		{
+			return true;
+		}
+		
+		return false;
 	}
 
 	/**
@@ -200,6 +217,20 @@ public class ElevensBoard {
 	 */
 	public boolean anotherPlayIsPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		
+		List<Integer> cardIndex;
+		cardIndex = new ArrayList<Integer>();
+		
+		for (int i = 0; i < cards.length; i++)
+		{
+			cardIndex.add(i);
+		}
+		
+		if (containsPairSum11(cardIndex) || containsJQK(cardIndex))
+		{
+			return true;
+		}
+		return false;
 	}
 
 
@@ -222,6 +253,18 @@ public class ElevensBoard {
 	 */
 	private boolean containsPairSum11(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		
+		if (selectedCards.size() == 2)
+		{
+			int valueOne = cards[selectedCards.get(0)].pointValue();
+			int valueTwo = cards[selectedCards.get(1)].pointValue();
+			if (valueOne + valueTwo == 11)
+			{
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 	/**
@@ -234,5 +277,24 @@ public class ElevensBoard {
 	 */
 	private boolean containsJQK(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		
+		if (selectedCards.size() == 3)
+		{
+			int valueOne = cards[selectedCards.get(0)].pointValue();
+			int valueTwo = cards[selectedCards.get(1)].pointValue();
+			int valueThree = cards[selectedCards.get(2)].pointValue();
+			if (valueOne == 10 && valueTwo == 10 && valueThree==10)
+			{
+				String rankOne = cards[selectedCards.get(0)].rank();
+				String rankTwo = cards[selectedCards.get(1)].rank();
+				String rankThree = cards[selectedCards.get(2)].rank();
+				
+				if ((!(rankOne.equals("ten"))) && (!(rankTwo.equals("ten"))) && (!(rankThree.equals("ten"))))
+				{
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }
