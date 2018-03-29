@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * The ElevensBoard class represents the board in a game of Elevens.
  */
-public class ElevensBoard extends Board {
+public class ElevensBoard2 extends Board {
 
 	/**
 	 * The size (number of cards) on the board.
@@ -52,7 +52,7 @@ public class ElevensBoard extends Board {
 	/**
 	 * Creates a new <code>ElevensBoard</code> instance.
 	 */
-	public ElevensBoard() {
+	public ElevensBoard2() {
 		/*cards = new Card[BOARD_SIZE];
 		deck = new Deck(RANKS, SUITS, POINT_VALUES);
 		if (I_AM_DEBUGGING) {
@@ -201,7 +201,32 @@ public class ElevensBoard extends Board {
 	 */
 	public boolean isLegal(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
-		if (containsPairSum11 (selectedCards) || containsJQK (selectedCards))
+		/*for (int i = 0; i < selectedCards.size(); i++)
+		{
+			System.out.println(cardAt(selectedCards.get(i)));
+		}*/
+		
+		int trueConditions = 0;
+		if (containsPairSum11 (selectedCards))
+		{
+			trueConditions++;
+		}
+		
+		if (containsThreeSum11 (selectedCards))
+		{
+			trueConditions++;
+		}
+		if (containsJQK (selectedCards))
+		{
+			trueConditions++;
+		}
+		if (containsPairFaceCards (selectedCards))
+		{
+			trueConditions++;
+		}
+		
+		
+		if (trueConditions >=1)
 		{
 			return true;
 		}
@@ -223,7 +248,26 @@ public class ElevensBoard extends Board {
 		List<Integer> cardIndex = cardIndexes();
 		//System.out.println(containsPairSum11(cardIndex));
 		//System.out.println(containsJQK(cardIndex));
-		if (containsPairSum11(cardIndex) || containsJQK(cardIndex))
+		
+		int trueConditions = 0;
+		if (containsPairSum11 (cardIndex))
+		{
+			trueConditions++;
+		}
+		
+		if (containsThreeSum11 (cardIndex))
+		{
+			trueConditions++;
+		}
+		if (containsJQK (cardIndex))
+		{
+			trueConditions++;
+		}
+		if (containsPairFaceCards (cardIndex))
+		{
+			trueConditions++;
+		}
+		if (trueConditions >=1)
 		{
 			return true;
 		}
@@ -250,24 +294,57 @@ public class ElevensBoard extends Board {
 	 */
 	private boolean containsPairSum11(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
-	
-			int total = 0;
+			
+			int total2 = 0;
+			int total3 = 0;
 			for (int i = 0; i < selectedCards.size(); i++)
 			{
 				for (int j = 0; j < selectedCards.size(); j++)
 				{
 					if (i!=j)
 					{
-						total = cardAt(selectedCards.get(i)).pointValue() + cardAt(selectedCards.get(j)).pointValue();
+							total2 = cardAt(selectedCards.get(i)).pointValue() + cardAt(selectedCards.get(j)).pointValue();
+							
+							if (total2 == 11)
+							{
+								return true;
+							}
+					
 						
-						if (total == 11)
-						{
-							return true;
-						}
 					}
 				}
 			}
-
+			
+			
+			
+			
+			
+		
+		return false;
+	}
+	
+	private boolean containsThreeSum11 (List<Integer> selectedCards){
+		int total3 = 0;
+		for (int i = 0; i < selectedCards.size(); i++)
+		{
+			for (int j = 0; j < selectedCards.size(); j++)
+			{
+				for (int k = 0; k < selectedCards.size(); k++)
+				{
+					if (i != j && i != k && j !=k)
+					{
+						total3 = cardAt(selectedCards.get(i)).pointValue() + cardAt(selectedCards.get(j)).pointValue() + cardAt(selectedCards.get(k)).pointValue();
+							
+							if (total3 == 11)
+							{
+								return true;
+							}
+					
+						
+					}
+				}
+			}
+		}
 		
 		return false;
 	}
@@ -315,5 +392,51 @@ public class ElevensBoard extends Board {
 
 		return false;
 		
+	}
+	
+	private boolean containsPairFaceCards(List<Integer> selectedCards)
+	{
+		String[] c = new String[selectedCards.size()];
+		for (int i = 0; i < c.length; i++)
+		{
+			c[i] = cardAt(selectedCards.get(i)).rank();
+			
+		}
+		int jackCount = 0;
+		int queenCount = 0;
+		int kingCount = 0;
+		
+			for (int i = 0; i < c.length; i++)
+			{
+				if (c[i].equals("jack"))
+				{
+					jackCount++;
+				}
+				if (c[i].equals("queen"))
+				{
+					queenCount++;
+				}
+				if (c[i].equals("king"))
+				{
+					kingCount++;
+				}
+
+			}
+			
+			if (jackCount >=2 && queenCount >=0 && kingCount >=0)
+			{
+				return true;
+			}
+			
+			if (jackCount >=0 && queenCount >=2 && kingCount >=0)
+			{
+				return true;
+			}
+			
+			if (jackCount >= 0 && queenCount >=0 && kingCount >=2)
+			{
+				return true;
+			}
+		return false;
 	}
 }

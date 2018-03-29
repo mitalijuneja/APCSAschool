@@ -29,7 +29,7 @@ public class DeckTester {
 		 */
 		String[] cardRanks = {"ace", "king", "queen", "jack", "10", "9", "8", "7", "6", "5", "4", "3", "2"};
 		String[] cardSuits = {"diamonds", "spades", "clubs", "hearts"};
-		int[] cardPointValues = {11, 10,10,10, 10, 9,8,7,6,5,4,3,2};
+		int[] cardPointValues = {11, 0,0,0, 10, 9,8,7,6,5,4,3,2};
 		Deck cardDeck = new Deck(cardRanks, cardSuits, cardPointValues);
 		System.out.println(cardDeck);
 		
