@@ -43,17 +43,24 @@ public class Paddle extends Block
    
    public Paddle (int x, int y, int w, int h, Color col, int s)
    {
-	   super (x,y,w,h);
+	   super (x,y,w,h, col);
 	   setSpeed (s);
-	   setColor (col);
    }
+   
+   public Paddle (int x, int y, int w, int h, Color col)
+   {
+	   super (x,y,w,h,col);
+	   setSpeed (5);
+   }
+   
+
 
 
    public void moveUpAndDraw(Graphics window)
    {
 	   Color currentColor = getColor();
-	   draw(window, Color.white);
-	   setY(getY() + speed);
+	   draw(window, Color.WHITE);
+	   setY(getY() - speed);
 	   draw(window, currentColor);
 	   
    }
@@ -62,7 +69,7 @@ public class Paddle extends Block
    {
 	   Color currentColor = getColor();
 	   draw(window, Color.white);
-	   setY(getY() - speed);
+	   setY(getY() + speed);
 	   draw(window, currentColor);
 
    }

@@ -3,7 +3,7 @@ package unit15;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Ball extends Block
+public class Ball extends Block implements Collidable
 {
 	private int xSpeed;
 	private int ySpeed;
@@ -46,6 +46,14 @@ public class Ball extends Block
 		setYSpeed (ySp);
 	}
 	
+	public Ball (Color col)
+	{
+		super(200,200);
+		setColor(col);
+		xSpeed = -2;
+		ySpeed = -1;
+	}
+	
 	
 
 	   
@@ -69,6 +77,7 @@ public class Ball extends Block
 	   draw(window, Color.white);
 
       setX(getX()+xSpeed);
+      
 		//setY
       setY(getY() + ySpeed);
 
@@ -101,6 +110,45 @@ public class Ball extends Block
 		return ySpeed;
 	}
 
+	public boolean didCollideLeft (Object obj)
+	{
+		Block b = (Block)obj;
+		if (this.getX() <= b.getX() + b.getWidth() && (this.getY() >= b.getY() && this.getY() <= b.getY() + b.getHeight()))
+		{
+			return true;
+		}
+				
+		return false;
+	}
+	public boolean didCollideRight(Object obj)
+	{
+		Block b = (Block)obj;
+		if (this.getX() + this.getWidth() >= b.getX() && (this.getY() >= b.getY() && this.getY() <= b.getY() + b.getHeight()))
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	public boolean didCollideTop (Object obj)
+	{
+		Block b = (Block)obj;
+		if (this.getY() <= b.getY() + b.getHeight() && (this.getX() >= b.getX() && this.getX() <= b.getX() + b.getWidth()))
+		{
+			return true;
+		}
+		return false;
+	}
+	public boolean didCollideBottom (Object obj)
+	{
+		Block b = (Block)obj;
+		
+		if (this.getY() + this.getHeight() >= b.getY() && (this.getX() >= b.getX() && this.getX() <= b.getX() + b.getWidth()))
+		{
+			return true;
+		}
+		return false;
+	}
    //add a toString() method
 	public String toString()
 	{
