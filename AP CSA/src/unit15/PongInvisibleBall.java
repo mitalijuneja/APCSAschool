@@ -11,9 +11,9 @@ import static java.lang.Character.*;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 
-public class Pong extends Canvas implements KeyListener, Runnable
+public class PongInvisibleBall extends Canvas implements KeyListener, Runnable
 {
-	private Ball ball;
+	private InvisibleBall ball;
 	private Paddle leftPaddle;
 	private Paddle rightPaddle;
 	private boolean[] keys;
@@ -28,10 +28,10 @@ public class Pong extends Canvas implements KeyListener, Runnable
 	private static final int HEIGHT = 600;
 
 
-	public Pong()
+	public PongInvisibleBall()
 	{
 		//set up all variables related to the game
-		ball = new Ball (Color.BLUE);
+		ball = new InvisibleBall (Color.BLUE);
 		leftPaddle = new Paddle (15, 50, 20, 80, Color.ORANGE);
 		rightPaddle = new Paddle (WIDTH - 35, 50, 20, 80, Color.ORANGE);
 		rightScore = 0;

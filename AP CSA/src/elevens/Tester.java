@@ -22,7 +22,7 @@ public class Tester extends JFrame
 		((Component)padTest).setFocusable(true);			
 		getContentPane().add(padTest);
 		
-		//getContentPane().add(new BlinkyBallTest());
+		getContentPane().add(new BlinkyBallTest());
 				
 		setVisible(true);
 	}

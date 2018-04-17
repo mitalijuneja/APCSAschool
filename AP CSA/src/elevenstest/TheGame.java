@@ -1,5 +1,7 @@
-package unit15;
+package elevenstest;
 
+
+import java.awt.Color;
 import javax.swing.JFrame;
 import java.awt.Component;
 
@@ -13,11 +15,8 @@ public class TheGame extends JFrame
 		super("PONG");
 		setSize(WIDTH,HEIGHT);
 		
-		//Pong game = new Pong();
-		//PongBlinkyBall game = new PongBlinkyBall();
-		//PongSpeedUpBall game = new PongSpeedUpBall();
-		//PongInvisibleBall game = new PongInvisibleBall();
 		BreakOut game = new BreakOut();
+		
 		((Component)game).setFocusable(true);			
 		getContentPane().add(game);
 						
