@@ -117,6 +117,59 @@ public class PictureTester
     swan.explore();
   }
   
+  public static void testMirrorArms()
+  {
+	  Picture snowman = new Picture ("snowman.jpg");
+	  snowman.explore();
+	  snowman.mirrorArms();
+	  snowman.explore();
+  }
+  
+  public static void testMirrorGull()
+  {
+	  Picture gull = new Picture ("seagull.jpg");
+	  gull.explore();
+	  gull.mirrorGull();
+	  gull.explore();
+  }
+  
+  public static void testCopy()
+  {
+	  Picture gull = new Picture("seagull.jpg");
+	  gull.explore();
+	  gull.copy(gull, 50, 50, 100, 100, 200, 200);
+	  gull.explore();
+  }
+  
+  public static void testEdgeDetection2()
+  {
+	  Picture swan = new Picture ("swan.jpg");
+	  swan.explore();
+	  swan.edgeDetection2(0.11);
+	  swan.explore();
+  }
+  
+  
+  public static void testBlur()
+  {
+	  Picture m = new Picture ("koala.jpg");
+	  m.explore();
+	  m.blur(50, 50,300, 300);
+	  m.blur(50, 50,300, 300);
+	  m.blur(50, 50,300, 300);
+	  m.blur(50, 50,300, 300);
+
+	  /*m.blur(0, 0,1000, 1000);
+	  m.blur(0, 0,1000, 1000);
+	  m.blur(0, 0,1000, 1000);*/
+
+	 /* m.blur(50, 50, 200, 200);
+	  m.blur(50, 50, 200, 200);
+	  m.blur(50, 50, 200, 200);
+	  m.blur(50, 50, 200, 200);*/
+	  m.explore();
+  }
+  
   /** Main method for testing.  Every class can have a main
     * method in Java */
   public static void main(String[] args)
@@ -135,7 +188,8 @@ public class PictureTester
 	  //testMirrorVerticalRightToLeft();
 	  //testMirrorHorizontal();
 	  //testMirrorHorizontalBotToTop();
-    testMirrorTemple();
+    //testMirrorTemple();
+	  testBlur();
     //testMirrorArms();
     //testMirrorGull();
     //testMirrorDiagonal();
