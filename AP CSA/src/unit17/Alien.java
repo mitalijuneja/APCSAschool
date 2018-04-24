@@ -51,6 +51,8 @@ public class Alien extends MovingThing
 	{
    	window.drawImage(image,getX(),getY(),80,80,null);
 	}
+	
+
 
 	public String toString()
 	{
