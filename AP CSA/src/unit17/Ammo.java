@@ -45,6 +45,23 @@ public class Ammo extends MovingThing
 		//add code to draw the ammo
 		window.fillRect(getX(), getY(), 10, 10);
 	}
+	
+	public boolean offScreen()
+	{
+		return this.getX() < 0 || this.getX() > 790 || this.getY() < 0 || this.getY() > 630;
+	}
+	
+	
+	
+	public boolean collide(Object object)
+	{
+		MovingThing c = (MovingThing)object;
+		if ((this.getX() + 10 >= c.getX()) && (this.getX() <=c.getX() + 80) && (this.getY() <= c.getY() + 80) && (this.getY() + 10 >= c.getY()))
+		{
+			return true;
+		}
+		return false;
+	}	
 
 	public String toString()
 	{

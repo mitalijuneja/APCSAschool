@@ -18,6 +18,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 	private Alien alienOne;
 	private Alien alienTwo;
 	private Ammo ammo;
+	private int score;
 
 	/* uncomment once you are ready for this part
 	 *
@@ -37,8 +38,9 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		//instantiate other stuff
 		alienOne = new Alien(150,50,1);
 		alienTwo = new Alien(150,150,1);
-		ship = new Ship(20,20,1);
-		ammo = new Ammo (30, 30, 1);
+		ship = new Ship(500,350,1);
+		ammo = new Ammo (ship.getX(), ship.getY(), -1);
+		score = 0;
 
 		this.addKeyListener(this);
 		new Thread(this).start();
@@ -69,6 +71,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		graphToBack.drawString("StarFighter ", 25, 50 );
 		graphToBack.setColor(Color.BLACK);
 		graphToBack.fillRect(0,0,800,600);
+		graphToBack.setColor(Color.GREEN);
+		graphToBack.drawString("Score: " + score, 100, 500);
 		
 		
 		ship.draw(graphToBack);
@@ -103,8 +107,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 			if (ship.getX() >= 5)
 			{
 				ship.move("LEFT");
-				alienOne.move("LEFT");
-				alienTwo.move("LEFT");
+				
 			}
 		}
 
@@ -114,8 +117,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 			if (ship.getX() <= 700)
 			{
 				ship.move("RIGHT");
-				alienOne.move("RIGHT");
-				alienTwo.move("RIGHT");
+				
 			}
 		}
 		
@@ -139,11 +141,31 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 			graphToBack.setColor(Color.BLACK);
 			ammo.setPos(ammo.getX() + ammo.getSpeed(), ammo.getY() + ammo.getSpeed());
 			graphToBack.setColor(Color.YELLOW);
-			ammo.draw(graphToBack);	
+			ammo.draw(graphToBack);
+			keys[4] = true;
 		}
 
 
 		//add in collision detection
+		if (ammo.collide(alienOne))
+		{
+			alienOne.hit(graphToBack);
+			graphToBack.setColor(Color.BLACK);
+			graphToBack.drawString("Score: " + score, 100, 500);
+			score++;
+			graphToBack.setColor(Color.GREEN);
+			graphToBack.drawString("Score: " + score , 100, 500);
+		}
+		if (ammo.collide(alienTwo))
+		{
+			alienTwo.hit(graphToBack);
+			graphToBack.setColor(Color.BLACK);
+			graphToBack.drawString("Score: " + score, 100, 500);
+			score++;
+			graphToBack.setColor(Color.GREEN);
+			graphToBack.drawString("Score: " + score , 100, 500);
+		}
+		
 
 		
 
@@ -196,7 +218,19 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE)
 		{
-			keys[4] = false;
+			
+			if (!ammo.offScreen() && !ammo.collide(alienOne) && !ammo.collide(alienTwo))
+			{
+				keys[4] = true;
+			}
+			
+			else
+			{
+				keys[4] = false;
+				
+				
+				ammo.setPos(ship.getX(), ship.getY());
+			}
 		}
 		repaint();
 	}
