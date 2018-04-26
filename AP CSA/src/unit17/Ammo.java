@@ -46,6 +46,12 @@ public class Ammo extends MovingThing
 		window.fillRect(getX(), getY(), 10, 10);
 	}
 	
+	public void collideDraw (Graphics window)
+	{
+		window.setColor(Color.BLACK);
+		draw(window);
+	}
+	
 	public boolean offScreen()
 	{
 		return this.getX() < 0 || this.getX() > 790 || this.getY() < 0 || this.getY() > 630;

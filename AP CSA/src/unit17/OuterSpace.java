@@ -19,10 +19,13 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 	private Alien alienTwo;
 	private Ammo ammo;
 	private int score;
+	private Aliens alienMatrix;
+	private ArrayList<Alien> aliens;
+	private ArrayList<Boolean> hit;
 
 	/* uncomment once you are ready for this part
 	 *
-	private ArrayList<Alien> aliens;
+
 	private ArrayList<Ammo> shots;
 	*/
 
@@ -38,6 +41,20 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		//instantiate other stuff
 		alienOne = new Alien(150,50,1);
 		alienTwo = new Alien(150,150,1);
+		alienMatrix = new Aliens();
+		aliens = new ArrayList<Alien>();
+		hit = new ArrayList<Boolean>();
+		for (int i = 0; i < alienMatrix.getAliens().length*alienMatrix.getAliens()[0].length; i++)
+		{
+			hit.add(false);
+		}
+		for (int r = 0; r < alienMatrix.getAliens().length; r++)
+		{
+			for (int c = 0; c < alienMatrix.getAliens()[r].length; c++)
+			{
+				aliens.add(alienMatrix.getAliens()[r][c]);
+			}
+		}
 		ship = new Ship(500,350,1);
 		ammo = new Ammo (ship.getX(), ship.getY(), -1);
 		score = 0;
@@ -73,33 +90,68 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		graphToBack.fillRect(0,0,800,600);
 		graphToBack.setColor(Color.GREEN);
 		graphToBack.drawString("Score: " + score, 100, 500);
-		
+		int count = 0;
+		for (boolean b: hit)
+		{
+			if (b == true)
+			{
+				count++;
+			}
+		}
+		if (count ==  hit.size())
+		{
+			graphToBack.setColor(Color.CYAN);
+			graphToBack.drawString("YOU WIN!", 300, 500);
+		}
 		
 		ship.draw(graphToBack);
-		alienOne.draw(graphToBack);
-		alienTwo.draw(graphToBack);
-		
-		
-		
-		if (alienOne.getX() >= 20 && alienOne.getX()<= 700 )
+		for (Alien a:aliens)
 		{
-			alienOne.move("RIGHT");
+			a.draw(graphToBack);
+		}
+		//alienOne.draw(graphToBack);
+		//alienTwo.draw(graphToBack);
+		
+		
+		
+		if (aliens.get(0).getX() >= 20 && aliens.get(0).getX()<= 700 )
+		{
+			aliens.get(0).move("RIGHT");
 		}
 		else
 		{
-			alienOne.setSpeed(0 - alienOne.getSpeed());
-			alienOne.move("RIGHT");
+			aliens.get(0).setSpeed(0 - aliens.get(0).getSpeed());
+			aliens.get(0).move("RIGHT");
 		}
 		
 
-		if (alienTwo.getX() >= 20 && alienTwo.getX() <= 700)
+		if (aliens.get(1).getX() >= 20 && aliens.get(1).getX() <= 700)
 		{
-			alienTwo.move("LEFT");
+			aliens.get(1).move("LEFT");
 		}
 		else
 		{
-			alienTwo.setSpeed(0 - alienTwo.getSpeed());
-			alienTwo.move("LEFT");
+			aliens.get(1).setSpeed(0 - aliens.get(1).getSpeed());
+			aliens.get(1).move("LEFT");
+		}
+
+		if (aliens.get(2).getX() >= 20 && aliens.get(2).getX() <= 700)
+		{
+			aliens.get(2).move("LEFT");
+		}
+		else
+		{
+			aliens.get(2).setSpeed(0 - aliens.get(2).getSpeed());
+			aliens.get(2).move("LEFT");
+		}
+		if (aliens.get(3).getX() >= 20 && aliens.get(3).getX() <= 700)
+		{
+			aliens.get(3).move("LEFT");
+		}
+		else
+		{
+			aliens.get(3).setSpeed(0 - aliens.get(3).getSpeed());
+			aliens.get(3).move("LEFT");
 		}
 
 		if(keys[0] == true)
@@ -147,25 +199,57 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 
 		//add in collision detection
-		if (ammo.collide(alienOne))
+		if (ammo.collide(aliens.get(0)))
 		{
-			alienOne.hit(graphToBack);
+			aliens.get(0).hit(graphToBack);
 			graphToBack.setColor(Color.BLACK);
 			graphToBack.drawString("Score: " + score, 100, 500);
 			score++;
 			graphToBack.setColor(Color.GREEN);
 			graphToBack.drawString("Score: " + score , 100, 500);
+			ammo.setPos(ship.getX(), ship.getY());
+			keys[4] = false;
+			hit.set(0, true);
 		}
-		if (ammo.collide(alienTwo))
+		if (ammo.collide(aliens.get(1)))
 		{
-			alienTwo.hit(graphToBack);
+			aliens.get(1).hit(graphToBack);
 			graphToBack.setColor(Color.BLACK);
 			graphToBack.drawString("Score: " + score, 100, 500);
 			score++;
 			graphToBack.setColor(Color.GREEN);
 			graphToBack.drawString("Score: " + score , 100, 500);
+			ammo.setPos(ship.getX(), ship.getY());
+			keys[4] = false;
+			hit.set(1, true);
 		}
 		
+		if (ammo.collide(aliens.get(2)))
+		{
+			aliens.get(2).hit(graphToBack);
+			graphToBack.setColor(Color.BLACK);
+			graphToBack.drawString("Score: " + score, 100, 500);
+			score++;
+			graphToBack.setColor(Color.GREEN);
+			graphToBack.drawString("Score: " + score , 100, 500);
+			ammo.setPos(ship.getX(), ship.getY());
+			keys[4] = false;
+			hit.set(2, true);
+
+		}
+		if (ammo.collide(aliens.get(3)))
+		{
+			aliens.get(3).hit(graphToBack);
+			graphToBack.setColor(Color.BLACK);
+			graphToBack.drawString("Score: " + score, 100, 500);
+			score++;
+			graphToBack.setColor(Color.GREEN);
+			graphToBack.drawString("Score: " + score , 100, 500);
+			ammo.setPos(ship.getX(), ship.getY());
+			keys[4] = false;
+			hit.set(3, true);
+
+		}
 
 		
 
@@ -219,16 +303,14 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		if (e.getKeyCode() == KeyEvent.VK_SPACE)
 		{
 			
-			if (!ammo.offScreen() && !ammo.collide(alienOne) && !ammo.collide(alienTwo))
+			if (!ammo.offScreen() && !ammo.collide(aliens.get(0)) && !ammo.collide(aliens.get(1)) && !ammo.collide(aliens.get(2)) && !ammo.collide(aliens.get(3)))
 			{
 				keys[4] = true;
 			}
 			
-			else
+			else if (ammo.offScreen())
 			{
 				keys[4] = false;
-				
-				
 				ammo.setPos(ship.getX(), ship.getY());
 			}
 		}
