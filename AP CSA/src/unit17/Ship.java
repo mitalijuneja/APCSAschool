@@ -10,6 +10,7 @@ public class Ship extends MovingThing
 {
 	private int speed;
 	private Image image;
+	private String imageName;
 
 	public Ship()
 	{
@@ -28,6 +29,7 @@ public class Ship extends MovingThing
 		try
 		{
 			image = ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\unit17\\ship.jpg"));
+			imageName = "ship";
 		}
 		catch(Exception e)
 		{
@@ -53,6 +55,23 @@ public class Ship extends MovingThing
    	window.drawImage(image,getX(),getY(),80,80,null);
 	}
 
+	public void changeImage()
+	{
+		try
+		{
+			image = ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\unit17\\ship.jpgWithShield.jpg"));
+			imageName = "shield";
+		}
+		catch(Exception e)
+		{
+			//feel free to do something here
+			System.out.println("hi");
+		}
+	}
+	public String getImage()
+	{
+		return imageName;
+	}
 	public String toString()
 	{
 		return super.toString() + "speed = " + getSpeed();

@@ -54,7 +54,7 @@ public class Ammo extends MovingThing
 	
 	public boolean offScreen()
 	{
-		return this.getX() < 0 || this.getX() > 790 || this.getY() < 0 || this.getY() > 630;
+		return this.getX() <= 0 || this.getX() >= 790 || this.getY() <= 0 || this.getY() >= 590;
 	}
 	
 	
