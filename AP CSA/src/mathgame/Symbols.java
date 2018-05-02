@@ -9,6 +9,11 @@ public abstract class Symbols {
 		return number;
 	}
 	
+	public void setNumber(int n)
+	{
+		number = n;
+	}
+	
 	
 	
 }

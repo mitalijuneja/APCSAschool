@@ -25,7 +25,7 @@ public class PlayGame extends JFrame
 
 	public static void main( String args[] )
 	{
-		MathGame run = new MathGame();
+		PlayGame run = new PlayGame();
 	}
 }
 

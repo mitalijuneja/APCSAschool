@@ -20,7 +20,7 @@ public class Number extends Symbols {
 	
 	public void random()
 	{
-		number = (int)(Math.random() * 11);
+		number = (int)(Math.random() * 10);
 	}
 	
 	/*public int getNumber()
@@ -31,7 +31,7 @@ public class Number extends Symbols {
 	
 	public void setImage()
 	{
-		imageName = "" + number+ ".png";
+		imageName = number+ ".png";
 		try
 		{
 			image = ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\mathgame\\" + imageName));
@@ -41,11 +41,12 @@ public class Number extends Symbols {
 			//feel free to do something here
 			System.out.println("hi");
 		}
+		
 	}
 	
 	public void draw(Graphics window, int x, int y)
 	{
-		window.drawImage(image,x,y,80,80,null);
+		window.drawImage(image,x,y,162,169,null);
 	}
 
 }

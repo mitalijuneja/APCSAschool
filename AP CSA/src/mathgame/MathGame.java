@@ -26,7 +26,7 @@ public class MathGame extends Canvas implements KeyListener, Runnable
 
 	public MathGame()
 	{
-		setBackground(Color.black);
+		setBackground(Color.white);
 
 		keys = new boolean[3];
 		sign = new Operator();
@@ -34,12 +34,38 @@ public class MathGame extends Canvas implements KeyListener, Runnable
 		n2 = new Number();
 		answers = new Answer();
 
+		n1.random();
+		
+		n2.random();
+		
+		sign.random();
+		sign.setImage();
+		
+		while (sign.getSign().equals("divide") && n2.getNumber() == 0)
+		{
+			n2.random();
+		}
+		
+		if ((n1.getNumber() < n2.getNumber() || sign.getSign().equals("subtract)")))
+		{
+			int temp = n1.getNumber();
+			
+			n1.setNumber(n2.getNumber());
+			n2.setNumber(temp);
+		}
+		
+		while (sign.getSign().equals("divide") && n1.getNumber() % n2.getNumber() != 0)
+		{
+			n2.random();
+		}
+		
+		n1.setImage();
+		n2.setImage();
+
 		this.addKeyListener(this);
 		new Thread(this).start();
 
 		setVisible(true);
-		
-
 	}
 
    public void update(Graphics window)
@@ -49,21 +75,19 @@ public class MathGame extends Canvas implements KeyListener, Runnable
 
 	public void paint( Graphics window )
 	{
-		//System.out.println(alienFire);
-		//set up the double buffering to make the game animation nice and smooth
 		Graphics2D twoDGraph = (Graphics2D)window;
 
-		//take a snap shop of the current screen and same it as an image
-		//that is the exact same width and height as the current screen
 		if(back==null)
 		   back = (BufferedImage)(createImage(getWidth(),getHeight()));
 
-		//create a graphics reference to the back ground image
-		//we will draw all changes on the background image
+
 		Graphics graphToBack = back.createGraphics();
 		
-		
-		
+	
+
+		n1.draw(graphToBack, 50, 50);
+		n2.draw(graphToBack, 290, 50);
+		sign.draw(graphToBack, 210, 90);
 		
 		
 		
@@ -136,7 +160,7 @@ public class MathGame extends Canvas implements KeyListener, Runnable
    	{
    		while(true)
    		{
-   		   Thread.currentThread().sleep(5);
+   		   Thread.currentThread().sleep(8);
             repaint();
          
 
