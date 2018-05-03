@@ -40,12 +40,24 @@ public class MathGame extends Canvas implements KeyListener, Runnable
 		
 		sign.random();
 		sign.setImage();
-		
-		while (sign.getSign().equals("divide") && n2.getNumber() == 0)
+		answers.assignPosition();
+		System.out.println("1: " + answers.getPositionC());
+		System.out.println("2: " + answers.getPositionW1());
+		System.out.println("3: " + answers.getPositionW2());
+
+		n2.setNumber(0);
+
+		sign.setNumber(3);
+		System.out.println("n1 " + n1.getNumber());
+		System.out.println("n1 " + n1.getNumber());
+
+		while (sign.getNumber() == 3 && (n2.getNumber() == 0 || n1.getNumber() == 0))
 		{
 			n2.random();
 		}
-		
+	
+		System.out.println("n1 " + n1.getNumber());
+		System.out.println("n1 " + n1.getNumber());
 		if ((n1.getNumber() < n2.getNumber() || sign.getSign().equals("subtract)")))
 		{
 			int temp = n1.getNumber();
@@ -53,14 +65,28 @@ public class MathGame extends Canvas implements KeyListener, Runnable
 			n1.setNumber(n2.getNumber());
 			n2.setNumber(temp);
 		}
-		
-		while (sign.getSign().equals("divide") && n1.getNumber() % n2.getNumber() != 0)
+		System.out.println("n1 " + n1.getNumber());
+		System.out.println("n1 " + n1.getNumber());
+		while ((sign.getNumber() == 3) && (n1.getNumber() % n2.getNumber() != 0))
 		{
 			n2.random();
 		}
+		System.out.println("n1 " + n1.getNumber());
+		System.out.println("n1 " + n1.getNumber());
+		if ((n1.getNumber() < n2.getNumber() || sign.getSign().equals("divide)")))
+		{
+			int temp = n1.getNumber();
+			
+			n1.setNumber(n2.getNumber());
+			n2.setNumber(temp);
+		}
+		System.out.println("n1 " + n1.getNumber());
+		System.out.println("n1 " + n1.getNumber());
 		
 		n1.setImage();
 		n2.setImage();
+		sign.setImage();
+
 
 		this.addKeyListener(this);
 		new Thread(this).start();

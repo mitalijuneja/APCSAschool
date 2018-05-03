@@ -92,13 +92,11 @@ public class Answer {
 	public void assignPosition()
 	{
 		positionC = (int) (Math.random() * 3);
-		while (positionW1 != positionC && positionW2 != positionC && positionW1 != positionW2)
+		while ((positionW1 == positionC) || (positionW2 == positionC) ||(positionW1 == positionW2))
 		{
 			positionW1 = (int) (Math.random() *3);
 			positionW2 = (int)(Math.random() * 3);
 			
-			System.out.println("HI");
-
 		}
 	}
 	
