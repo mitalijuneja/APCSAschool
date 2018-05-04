@@ -15,12 +15,12 @@ public class Number extends Symbols {
 	
 	public Number()
 	{
-		number = 0;
+		setNumber(0);
 	}
 	
 	public void random()
 	{
-		number = (int)(Math.random() * 10);
+		setNumber((int)(Math.random() * 10));
 	}
 	
 	/*public int getNumber()
@@ -31,7 +31,7 @@ public class Number extends Symbols {
 	
 	public void setImage()
 	{
-		imageName = number+ ".png";
+		imageName = getNumber() + ".png";
 		try
 		{
 			image = ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\mathgame\\" + imageName));

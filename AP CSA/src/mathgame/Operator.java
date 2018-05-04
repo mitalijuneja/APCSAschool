@@ -25,18 +25,19 @@ public class Operator extends Symbols{
 	}
 	public void random()
 	{
-		number = (int)(Math.random() * 4);
-		System.out.println(number);
+		
+		setNumber((int)(Math.random() * 4));
+		System.out.println(getNumber());
 
 	}
 	
 	public String getSign()
 	{
-		return signs[number];
+		return signs[getNumber()];
 	}
 	public void setImage()
 	{
-		imageName = signs[number] + ".png";
+		imageName = signs[getNumber()] + ".png";
 		
 		try
 		{

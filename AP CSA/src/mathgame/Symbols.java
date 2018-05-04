@@ -1,7 +1,7 @@
 package mathgame;
 
 public abstract class Symbols {
-	int number;
+	private int number;
 	public abstract void random();
 	
 	public int getNumber()

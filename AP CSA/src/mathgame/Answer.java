@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
+import java.util.Arrays;
+
 import javax.imageio.ImageIO;
 
 
@@ -15,6 +17,7 @@ public class Answer {
 	private int positionC;
 	private int positionW1;
 	private int positionW2;
+	private int[] answerChoices;
 	
 	private Image imageC;
 	private Image imageW1;
@@ -34,6 +37,8 @@ public class Answer {
 		positionC = 0;
 		positionW1 = 0;
 		positionW2 = 0;
+		
+		answerChoices = new int[3];
 	}
 	
 	public void calculateAnswer(int number1, int number2, int sign)
@@ -100,6 +105,32 @@ public class Answer {
 		}
 	}
 	
+	public void positionAnswers()
+	{
+		for (int i = 0; i < answerChoices.length; i++)
+		{
+			if (positionW1 == i)
+			{
+				answerChoices[i] = getWrong1();
+			}
+			
+			if (positionW2 == i)
+			{
+				answerChoices[i] = getWrong2();
+			}
+			
+			if (positionC == i)
+			{
+				answerChoices[i] = getCorrect();
+			}
+		}
+		System.out.println(Arrays.toString(answerChoices));
+	}
+	
+	public int[] getChoices()
+	{
+		return answerChoices;
+	}
 	public void setImages()
 	{
 		imageNameC = correct + ".png";
@@ -126,7 +157,7 @@ public class Answer {
 		wrong1 = correct;
 		wrong2 = correct;
 		
-		while (wrong1 == correct || wrong2 == correct)
+		while ((wrong1 == correct) || (wrong2 == correct) || (wrong1 == wrong2))
 		{
 			wrong1 = (int) (Math.random() * (correct + 5));
 			wrong2 = (int) (Math.random() * (correct + 5));

@@ -21,6 +21,7 @@ public class MathGame extends Canvas implements KeyListener, Runnable
 	private Answer answers;
 
 
+
 	private boolean[] keys;
 	private BufferedImage back;
 
@@ -33,7 +34,7 @@ public class MathGame extends Canvas implements KeyListener, Runnable
 		n1 = new Number();
 		n2 = new Number();
 		answers = new Answer();
-
+	
 		n1.random();
 		
 		n2.random();
@@ -45,19 +46,20 @@ public class MathGame extends Canvas implements KeyListener, Runnable
 		System.out.println("2: " + answers.getPositionW1());
 		System.out.println("3: " + answers.getPositionW2());
 
-		n2.setNumber(0);
+	/*	n2.setNumber(0);
 
-		sign.setNumber(3);
+		sign.setNumber(3);*/
 		System.out.println("n1 " + n1.getNumber());
-		System.out.println("n1 " + n1.getNumber());
+		System.out.println("n2 " + n2.getNumber());
 
 		while (sign.getNumber() == 3 && (n2.getNumber() == 0 || n1.getNumber() == 0))
 		{
 			n2.random();
+			n1.random();
 		}
 	
 		System.out.println("n1 " + n1.getNumber());
-		System.out.println("n1 " + n1.getNumber());
+		System.out.println("n2 " + n2.getNumber());
 		if ((n1.getNumber() < n2.getNumber() || sign.getSign().equals("subtract)")))
 		{
 			int temp = n1.getNumber();
@@ -66,13 +68,13 @@ public class MathGame extends Canvas implements KeyListener, Runnable
 			n2.setNumber(temp);
 		}
 		System.out.println("n1 " + n1.getNumber());
-		System.out.println("n1 " + n1.getNumber());
+		System.out.println("n2 " + n2.getNumber());
 		while ((sign.getNumber() == 3) && (n1.getNumber() % n2.getNumber() != 0))
 		{
 			n2.random();
 		}
 		System.out.println("n1 " + n1.getNumber());
-		System.out.println("n1 " + n1.getNumber());
+		System.out.println("n2 " + n2.getNumber());
 		if ((n1.getNumber() < n2.getNumber() || sign.getSign().equals("divide)")))
 		{
 			int temp = n1.getNumber();
@@ -81,11 +83,17 @@ public class MathGame extends Canvas implements KeyListener, Runnable
 			n2.setNumber(temp);
 		}
 		System.out.println("n1 " + n1.getNumber());
-		System.out.println("n1 " + n1.getNumber());
+		System.out.println("n2 " + n2.getNumber());
 		
 		n1.setImage();
 		n2.setImage();
 		sign.setImage();
+
+		answers.calculateAnswer(n1.getNumber(), n2.getNumber(), sign.getNumber());
+		answers.getRandom();
+		System.out.println("c" + answers.getCorrect());
+		System.out.println("w" + answers.getWrong1() + " " + answers.getWrong2());
+		answers.positionAnswers();
 
 
 		this.addKeyListener(this);
@@ -116,6 +124,11 @@ public class MathGame extends Canvas implements KeyListener, Runnable
 		sign.draw(graphToBack, 210, 90);
 		
 		
+		
+		graphToBack.drawString("" + answers.getChoices()[0], 100, 300);
+		graphToBack.drawString("" + answers.getChoices()[1], 200, 300);
+		graphToBack.drawString("" + answers.getChoices()[2], 300, 300);
+
 		
 
 		twoDGraph.drawImage(back, null, 0, 0);
