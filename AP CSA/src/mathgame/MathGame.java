@@ -11,6 +11,8 @@ import static java.lang.Character.*;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.awt.Font;
+
 
 public class MathGame extends Canvas implements KeyListener, Runnable
 {
@@ -19,7 +21,9 @@ public class MathGame extends Canvas implements KeyListener, Runnable
 	private Number n1;
 	private Number n2;
 	private Answer answers;
-
+	private int pressedKey;
+	private int score;
+	private int correctPosition;
 
 
 	private boolean[] keys;
@@ -27,35 +31,86 @@ public class MathGame extends Canvas implements KeyListener, Runnable
 
 	public MathGame()
 	{
-		setBackground(Color.white);
+		setBackground(Color.gray);
 
-		keys = new boolean[3];
+		keys = new boolean[4];
+		
 		sign = new Operator();
 		n1 = new Number();
 		n2 = new Number();
 		answers = new Answer();
-	
-		n1.random();
+		pressedKey = 3;
+		score = 0;
+		correctPosition = 10;
+		
+
+		newProblem();
+		
+		this.addKeyListener(this);
+		new Thread(this).start();
+
+		setVisible(true);
+	}
+
+   public void update(Graphics window)
+   {
+	   paint(window);
+   }
+   
+   public void startScreen(Graphics window)
+   {
+	   window.setColor(Color.gray);
+	   window.fillRect(0, 0, 800, 600);
+	   window.setColor(Color.white);
+	   window.setFont(new Font ("font", Font.BOLD, 40) );
+	   window.drawString("Math Facts", 300, 50);
+	  
+	   window.setFont(new Font ("font", Font.BOLD, 20) );
+	   window.drawString("Mitali Juneja", 300, 500);
+	   
+	   window.setFont(new Font ("font", Font.BOLD, 20) );
+	   window.setColor(Color.blue);
+	   window.drawString("For each math problem that appears on the screen, select the correct ", 50, 200);
+	   window.drawString("answer using number keys (1 for the left answer, 2 for the middle, and", 50, 230);
+	   window.drawString("3 for the right. Every correct answer is worth 1 point. Get 10 points to win!", 50, 260);
+	   
+	   window.setFont(new Font ("font", Font.BOLD, 25) );
+	   window.setColor(Color.CYAN);
+	   window.drawString("Press the SPACE key to begin", 200, 350);
+	   
+	   score = 0;
+   }
+   
+   public void winScreen(Graphics window)
+   {
+	   window.setColor(Color.gray);
+	   window.fillRect(0, 0, 800, 600);
+	   window.setColor(Color.cyan);
+	   window.setFont(new Font ("font", Font.BOLD, 35) );
+	   window.drawString("You win!", 350, 100);
+
+   }
+   
+   public void newProblem()
+   {	   
+	   n1.random();
 		
 		n2.random();
 		
 		sign.random();
 		sign.setImage();
-		answers.assignPosition();
+		
 		System.out.println("1: " + answers.getPositionC());
 		System.out.println("2: " + answers.getPositionW1());
 		System.out.println("3: " + answers.getPositionW2());
 
-	/*	n2.setNumber(0);
-
-		sign.setNumber(3);*/
 		System.out.println("n1 " + n1.getNumber());
 		System.out.println("n2 " + n2.getNumber());
 
 		while (sign.getNumber() == 3 && (n2.getNumber() == 0 || n1.getNumber() == 0))
 		{
-			n2.random();
-			n1.random();
+			sign.random();
+	
 		}
 	
 		System.out.println("n1 " + n1.getNumber());
@@ -72,6 +127,10 @@ public class MathGame extends Canvas implements KeyListener, Runnable
 		while ((sign.getNumber() == 3) && (n1.getNumber() % n2.getNumber() != 0))
 		{
 			n2.random();
+			while (n2.getNumber() == 0)
+			{
+				n2.random();
+			}
 		}
 		System.out.println("n1 " + n1.getNumber());
 		System.out.println("n2 " + n2.getNumber());
@@ -88,23 +147,15 @@ public class MathGame extends Canvas implements KeyListener, Runnable
 		n1.setImage();
 		n2.setImage();
 		sign.setImage();
+		answers.assignPosition();
+
 
 		answers.calculateAnswer(n1.getNumber(), n2.getNumber(), sign.getNumber());
 		answers.getRandom();
 		System.out.println("c" + answers.getCorrect());
 		System.out.println("w" + answers.getWrong1() + " " + answers.getWrong2());
 		answers.positionAnswers();
-
-
-		this.addKeyListener(this);
-		new Thread(this).start();
-
-		setVisible(true);
-	}
-
-   public void update(Graphics window)
-   {
-	   paint(window);
+		correctPosition = answers.getPositionC();
    }
 
 	public void paint( Graphics window )
@@ -117,17 +168,45 @@ public class MathGame extends Canvas implements KeyListener, Runnable
 
 		Graphics graphToBack = back.createGraphics();
 		
-	
+		if (score == 10)
+		{
+			graphToBack.setColor(Color.gray);
+			graphToBack.fillRect(0, 0, 800, 600);
+			winScreen(graphToBack);
+		}
+		else if (keys[3] == false)
+		{
+			startScreen(graphToBack);
+		}
+		else
+		{
+			
+			graphToBack.setColor(Color.gray);
+			graphToBack.fillRect(0, 0, 800, 600);
+			graphToBack.setColor(Color.white);
+			graphToBack.drawString("Score: " + score, 400, 350);
 
-		n1.draw(graphToBack, 50, 50);
-		n2.draw(graphToBack, 290, 50);
-		sign.draw(graphToBack, 210, 90);
+			n1.draw(graphToBack, 50, 50);
+			n2.draw(graphToBack, 290, 50);
+			sign.draw(graphToBack, 210, 90);
+			
+			
+			
+			graphToBack.drawString("" + answers.getChoices()[0], 100, 300);
+			graphToBack.drawString("" + answers.getChoices()[1], 200, 300);
+			graphToBack.drawString("" + answers.getChoices()[2], 300, 300);
+			
+			if (pressedKey == answers.getPositionC())
+			{
+				//score++;
+				graphToBack.setColor(Color.gray);
+				graphToBack.fillRect(0, 0, 800, 600);
+				newProblem();
+			}
+			
+		}
 		
 		
-		
-		graphToBack.drawString("" + answers.getChoices()[0], 100, 300);
-		graphToBack.drawString("" + answers.getChoices()[1], 200, 300);
-		graphToBack.drawString("" + answers.getChoices()[2], 300, 300);
 
 		
 
@@ -137,54 +216,59 @@ public class MathGame extends Canvas implements KeyListener, Runnable
 
 	public void keyPressed(KeyEvent e)
 	{
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+		if (e.getKeyCode() == KeyEvent.VK_1)
 		{
 			keys[0] = true;
+			pressedKey = 0;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+		if (e.getKeyCode() == KeyEvent.VK_2)
 		{
 			keys[1] = true;
+			pressedKey = 1;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_UP)
+		if (e.getKeyCode() == KeyEvent.VK_3)
 		{
 			keys[2] = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			keys[3] = true;
+			pressedKey = 2;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE)
 		{
-			keys[4] = true;
+			keys[3] = true;
 		}
 		repaint();
 	}
 
 	public void keyReleased(KeyEvent e)
 	{
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+		if (e.getKeyCode() == KeyEvent.VK_1)
 		{
 			keys[0] = false;
+			pressedKey = 0;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+		if (e.getKeyCode() == KeyEvent.VK_2)
 		{
 			keys[1] = false;
+			pressedKey = 1;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_UP)
+		if (e.getKeyCode() == KeyEvent.VK_3)
 		{
 			keys[2] = false;
+			pressedKey = 2;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			keys[3] = false;
-		}
+		
 		if (e.getKeyCode() == KeyEvent.VK_SPACE)
 		{
-			
-			
-			keys[4] = false;
-			
+			keys[3] = true;
+			score = 0;
+			score = score -1 ;
 		}
+		if (correctPosition == answers.getPositionC())
+		{
+			score++;
+		}
+		pressedKey = 3;
+		correctPosition = answers.getPositionC();
+		
 		repaint();
 	}
 
