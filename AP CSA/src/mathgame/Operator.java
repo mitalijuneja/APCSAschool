@@ -21,13 +21,13 @@ public class Operator extends Symbols{
 		signs[1] = "subtract";
 		signs[2] = "multiply";
 		signs[3] = "divide";
-		System.out.println("Done");
+		
 	}
 	public void random()
 	{
 		
 		setNumber((int)(Math.random() * 4));
-		System.out.println(getNumber());
+		//System.out.println(getNumber());
 
 	}
 	

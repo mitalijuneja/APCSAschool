@@ -23,9 +23,9 @@ public class Answer {
 	private Image imageW1;
 	private Image imageW2;
 	
-	String imageNameC;
-	String imageNameW1;
-	String imageNameW2;
+	private String imageNameC;
+	private String imageNameW1;
+	private String imageNameW2;
 	
 	
 	public Answer()
@@ -124,7 +124,7 @@ public class Answer {
 				answerChoices[i] = getCorrect();
 			}
 		}
-		System.out.println(Arrays.toString(answerChoices));
+		//System.out.println(Arrays.toString(answerChoices));
 	}
 	
 	public int[] getChoices()
@@ -161,7 +161,7 @@ public class Answer {
 		{
 			wrong1 = (int) (Math.random() * (correct + 5));
 			wrong2 = (int) (Math.random() * (correct + 5));
-			System.out.println("HI");
+			//System.out.println("HI");
 		}
 	} 
 

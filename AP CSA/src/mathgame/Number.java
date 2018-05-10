@@ -44,6 +44,7 @@ public class Number extends Symbols {
 		
 	}
 	
+
 	public void draw(Graphics window, int x, int y)
 	{
 		window.drawImage(image,x,y,162,169,null);
